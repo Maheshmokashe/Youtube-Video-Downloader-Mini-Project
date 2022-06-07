@@ -1,0 +1,33 @@
+from tkinter import *
+from pytube import YouTube
+
+tk_window = Tk()
+tk_window.geometry("600x700")
+tk_window.config(bg = "light blue")
+tk_window.title(" MY OWN YOUTUBE DOWNLOADER !!")
+
+Label(tk_window,text = "VIDEO DOWNLOADER",font = ("Arial",30,"bold"),
+      fg = "yellow",bg="light blue").pack(padx = 5 , pady = 50)
+
+l_video = StringVar()
+Label(tk_window, text = "Enter the link : ",font=("Arial",26,"bold"),
+      bg="grey",fg="black").place(x=170, y=150)
+
+l_entry = Entry(tk_window, width=50, font=34, textvariable = l_video,
+                bd=4).place(x=25, y=200)
+
+def d_video():
+    url_v = YouTube(str(l_video.get()))
+    videos = url_v.streams.first()
+    videos.download()
+
+    Label(tk_window ,text = "VIDEO DOWNLOADED",
+          font = ("Arial", 25, "bold"),bg="light pink",
+          fg="black").place(x=120, y=450)
+
+Button(tk_window, text="DOWNLOAD", font = ("Arial", 25, "bold"),
+       bg="white", fg="red",command=d_video).place(x=180, y=300)
+
+
+tk_window.mainloop()
+
